@@ -54,6 +54,7 @@ def process_templates(templates):
     for k, val in ansible_filters.iteritems():
         env.filters[k] = val
 
+    ret = 0
     for template in env.list_templates():
         try:
             tmpl = env.get_template(template)
@@ -63,8 +64,10 @@ def process_templates(templates):
             print "FAILED: %s in (%s) on line %s." % (exc,
                                                       template,
                                                       exc.lineno)
+            ret = 1
         except UndefinedError as exc:
             print "Undef! %s in %s" % (exc, template)
+            ret = 1
             # this needs to just pass as we're not inheriting ansible vars,
             # but if this triggers with SilentUndefined above, we should know
         except TypeError as exc:
@@ -75,6 +78,7 @@ def process_templates(templates):
             # them from the OS.
             # print "Template not found: %s" % exc
             pass
+    return ret
 
 def main():
     """ Check Templates in provided path """
@@ -105,9 +109,9 @@ def main():
     else:
         templates.append(path)
 
-    process_templates(templates)
+    ret = process_templates(templates)
 
-    exit(0)
+    exit(ret)
 
 
 if __name__ == "__main__":
