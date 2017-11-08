@@ -2,7 +2,7 @@
 
 - id: ansible_template_checker
   name: Ansible Template Checker
-  description: Validate jinja2 templates for Ansible
+  description: Validate jinja2 templates for Ansible. Does NOT check variables.
   entry: ansible_template_checker
   language: python
   files: \.(j2|jinja|jinja2)$
