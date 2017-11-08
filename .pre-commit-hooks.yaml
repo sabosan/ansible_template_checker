@@ -1,0 +1,8 @@
+---
+
+- id: ansible_template_checker
+  name: Ansible Template Checker
+  description: Validate jinja2 templates for Ansible
+  entry: ansible_template_checker
+  language: python
+  files: \.(j2|jinja|jinja2)$
