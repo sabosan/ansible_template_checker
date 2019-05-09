@@ -1,0 +1,7 @@
+#!/bin/bash
+something=("a" "b")
+{% set existo = testo.var_no_existo %}
+${#something}
+This is a {{ var|not_a_real_thing }} missing var test.
+{% set nogo = testotwo.lso_no_existo }
+

@@ -1,0 +1,6 @@
+repos:
+- repo: https://github.com/sabosan/ansible_template_checker.git
+  sha: 05013a0065b34cabfc711de55b37bc6b7375a207
+  hooks:
+    - id: ansible_template_checker
+      files: \.(j2|jinja|jinja2)$

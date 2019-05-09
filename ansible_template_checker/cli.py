@@ -51,7 +51,7 @@ def process_templates(templates):
     env = Environment(loader=loader, undefined=SilentUndefined)
     ansible_filters = get_ansible_filters()
 
-    for k, val in ansible_filters.iteritems():
+    for k, val in ansible_filters.items():
         env.filters[k] = val
 
     ret = 0
@@ -61,12 +61,12 @@ def process_templates(templates):
             # env.parse(template_data[template])
             tmpl.render()
         except (TemplateAssertionError, TemplateSyntaxError) as exc:
-            print "FAILED: %s in (%s) on line %s." % (exc,
+            print("FAILED: %s in (%s) on line %s." % (exc,
                                                       template,
-                                                      exc.lineno)
+                                                      exc.lineno))
             ret = 1
         except UndefinedError as exc:
-            print "Undef! %s in %s" % (exc, template)
+            print("Undef! %s in %s" % (exc, template))
             ret = 1
             # this needs to just pass as we're not inheriting ansible vars,
             # but if this triggers with SilentUndefined above, we should know
@@ -83,7 +83,7 @@ def process_templates(templates):
 def main():
     """ Check Templates in provided path """
     if len(sys.argv) < 2:
-        print "Please provide a path for testing"
+        print("Please provide a path for testing")
         exit(1)
 
     if str(sys.argv[1]).startswith('/'):
@@ -96,7 +96,7 @@ def main():
         path = '%s/%s' % (os.getcwd(), sys.argv[1])
 
     if not os.path.isdir(path) and not os.path.isfile(path):
-        print "Provided arg (%s) is not a file or directory." % sys.argv[1]
+        print("Provided arg (%s) is not a file or directory." % sys.argv[1])
         exit(1)
 
     templates = []
